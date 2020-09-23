@@ -4,8 +4,8 @@ from django.db import models
 
 
 class Inventory(models.Model):
-    type = models.CharField(max_length=100, blank=False)
-    quantity = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, blank=False)
+    quantity = models.CharField(max_length=50, default=1)
     price = models.IntegerField()
     count = models.IntegerField()
 
@@ -13,20 +13,20 @@ class Inventory(models.Model):
         abstract= True
 
     def __str__(self):
-        return 'Type : {0} Price : {1}'.format(self.type, self.price)
+        return 'Name : {0}, Quantity : {1}, Price : {2}, Count : {3}'.format(self.name, self.quantity, self.price, self.count)
 
 
-class VegetableFruits(Inventory):
+class VegetableFruit(Inventory):
     pass
 
-class GroceryStaples(Inventory):
+class GroceryStaple(Inventory):
     pass
 
-class HouseholdItems(Inventory):
+class HouseholdItem(Inventory):
     pass
 
 class PersonalCare(Inventory):
     pass
 
-class SnacksBeverages(Inventory):
+class SnacksBeverage(Inventory):
     pass

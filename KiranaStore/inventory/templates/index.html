@@ -2,45 +2,118 @@
 
 {% block body %}
 
-<div class="button-group">
-    <a href="#" class="btn btn-primary btn-md" role="button">Vegetable & Fruits </a>
-    <a href="#" class="btn btn-warning btn-sm" role="button">+</a>
-</div>
 
-<div class="button-group">
-    <a href="#" class="btn btn-primary btn-md" role="button">Grocery & Staples</a>
-    <a href="#" class="btn btn-warning btn-sm" role="button">+</a>
-</div>
+<br>
+<div class="btn-header">
 
-<div class="button-group">
-    <a href="#" class="btn btn-primary btn-md" role="button">Household Items</a>
-    <a href="#" class="btn btn-warning btn-sm" role="button">+</a>
-</div>
 
-<div class="button-group">
-    <a href="#" class="btn btn-primary btn-md" role="button">Personal Care </a>
-    <a href="#" class="btn btn-warning btn-sm" role="button">+</a>
+    <div class="btn-group">
+        <a href="{% url 'display_VegetableFruit' %}" class="btn btn-primary btn-md" role="button">Vegetable & Fruits </a>
+        <a href="{% url 'addVegetableFruit' %}" class="btn btn-warning btn-sm" role="button">+</a>
+    </div>
+    <div class="btn-group">
+        <a href="{% url 'display_GroceryStaple' %}" class="btn btn-primary btn-md" role="button">Grocery & Staples</a>
+        <a href="{% url 'addGroceryStaple' %}" class="btn btn-warning btn-sm" role="button">+</a>
+    </div>
+    <div class="btn-group">
+        <a href="{% url 'display_HouseholdItem' %}" class="btn btn-primary btn-md" role="button">Household Items</a>
+        <a href="{% url 'addHouseholdItem' %}" class="btn btn-warning btn-sm" role="button">+</a>
+    </div>
+    <div class="btn-group">
+        <a href="{% url 'display_PersonalCare' %}" class="btn btn-primary btn-md" role="button">Personal Care </a>
+        <a href="{% url 'addPersonalCare' %}" class="btn btn-warning btn-sm" role="button">+</a>
+    </div>
+    <div class="btn-group">
+        <a href="{% url 'display_SnacksBeverage' %}" class="btn btn-primary btn-md" role="button">Snacks & Beverages </a>
+        <a href="{% url 'addSnacksBeverage' %}" class="btn btn-warning btn-sm" role="button">+</a>
+    </div>
 </div>
+<br>
 
-<div class="button-group">
-    <a href="#" class="btn btn-primary btn-md" role="button">Snacks & Beverages </a>
-    <a href="#" class="btn btn-warning btn-sm" role="button">+</a>
-</div>
+<h3>Currenty Viewing {{currentHeading}}</h3>
 
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>id</th>
-            <th>Item Name</th>
+            <!-- <th>Id</th> -->
+            <th>Name</th>
             <th>Price</th>
+            <th>Qty</th>
             <th>Count</th>
+            <th></th>
         </tr>
     </thead>
 
     <tbody>
         
+        {% for item in items %}
+        
+        <tr>
+            <!-- <td>{{ item.pk }}</td> -->
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.count }}</td>
+    
+
+            {% if currentHeading == 'Vegetable & Fruits' %}
+            <td>
+                <a href="{% url 'editVegetableFruit' item.pk %}" class="btn btn-warning btn-sm">
+                    <i class="fa fa-pencil" aria-hidden="true"></i> 
+                </a>
+
+                <a href="{% url 'deleteVegetableFruit' item.pk %}" class="btn btn-danger btn-sm" role="button">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+            </td>
+            {% elif currentHeading == 'Grocery & Staples' %}
+            <td>
+                
+                <a href="{% url 'editGroceryStaple' item.pk %}" class="btn btn-warning btn-sm" role="button">
+                    <i class="fa fa-pencil" aria-hidden="true"></i> 
+                </a>
+
+                <a href="{% url 'deleteGroceryStaple' item.pk %}" class="btn btn-danger btn-sm" role="button">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+            </td>
+            {% elif currentHeading == 'Personal Care Items' %}
+            <td>
+                <a href="{% url 'editPersonalCare' item.pk %}" class="btn btn-warning btn-sm" role="button">
+                    <i class="fa fa-pencil" aria-hidden="true"></i> 
+                </a>
+
+                <a href="{% url 'deletePersonalCare' item.pk %}" class="btn btn-danger btn-sm" role="button">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+            </td>
+            {% elif currentHeading == 'Snack & Beverages' %}
+            <td>
+                <a href="{% url 'editSnacksBeverage' item.pk %}" class="btn btn-warning btn-sm" role="button">
+                    <i class="fa fa-pencil" aria-hidden="true"></i> 
+                </a>
+
+                <a href="{% url 'deleteSnacksBeverage' item.pk %}" class="btn btn-danger btn-sm" role="button">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+            </td>
+            {% elif currentHeading == 'Household Items' %}
+            <td>
+                <a href="{% url 'editHouseholdItem' item.pk %}" class="btn btn-warning btn-sm" role="button">
+                    <i class="fa fa-pencil" aria-hidden="true"></i> 
+                </a>
+ 
+                <a href="{% url 'deleteHouseholdItem' item.pk %}" class="btn btn-danger btn-sm" role="button">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+            </td>
+            {% endif %}
+
+        </tr>
+
+        {% endfor %}
     </tbody>
 </table>
 
 
-{ % endblock % }
+{% endblock %}

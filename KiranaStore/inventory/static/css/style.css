@@ -1,0 +1,11 @@
+.btn-header{
+    display: flex;
+    justify-content: space-between; 
+}
+
+.btn-group{
+    display: flex;
+    justify-content: space-around;
+    /* background-color: black; */
+}
+
